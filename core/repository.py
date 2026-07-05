@@ -1,7 +1,8 @@
 from json import load, dump
 from pathlib import Path
-from app.core.security import hash_password, check_pass
+from app.core.security import hash_password, check_pass, make_access_token
 from app.models.users import UserBase, UserCreate, UserOut, UserLogin
+from fastapi import HTTPException
 
 BASE_DIR = Path(__file__).parent / 'users.json'
 
@@ -22,7 +23,9 @@ async def register(user_data:UserCreate):
     
     with open(BASE_DIR, 'w') as f:
         dump(data, f, indent=2)
-        return data
+    
+    return UserOut.model_validate(dumped_data)
+    
 
 async def login(user:UserLogin):
     data = await get_users()
@@ -30,8 +33,9 @@ async def login(user:UserLogin):
     for u in data:
         if user.email == u['email']:
             if check_pass(user.password.encode('utf-8'), u['password'].encode('utf-8')):
-                return True
+                data_for_token = {'email':u['email'], 'username':u['username'],'id':u['id']}
+                return make_access_token(data_for_token)
             else:
-                return False
-        return '401'
+                raise HTTPException(status_code=401)
+        raise HTTPException(status_code=401)
             

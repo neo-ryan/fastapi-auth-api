@@ -6,14 +6,8 @@ async def register(user_data:UserCreate):
     return await repository.register(user_data)
 
 async def login(user:UserLogin):
-    response = await repository.login(user)
-    if response == '401':
-        raise HTTPException(status_code=401)
-    elif response == False:
-        return False
-    else:
-        return response
-
+    return await repository.login(user)
+    
 async def current_user():
     pass
 
