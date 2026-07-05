@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.models.users import UserBase, UserCreate, UserOut
+from app.models.users import UserBase, UserCreate, UserOut, UserLogin
 from app.services import user_function
 
 router = APIRouter(prefix='/auth')
@@ -9,8 +9,8 @@ async def register(user_data:UserCreate):
     return await user_function.register(user_data)
 
 @router.post('/login')
-async def login():
-    pass
+async def login(user:UserLogin):
+    return await user_function.login(user)
 
 @router.get('/users/me')
 async def current_user():

@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "username": "string",
+    "email": "user@example.com",
+    "password": "$2b$12$ljMwzWt2QZ.2vgUqV.DW.ePJrXC3EpkMgHeeXOWuttTb1p8z1whvG",
+    "id": 1
+  },
+  {
+    "username": "string2",
+    "email": "user@example.com",
+    "password": "$2b$12$ZhIsa4SCTjs0u6ZX/8MNy.3ZDlH.pLnLDTDg4jl9zRb0dts0fsgJG",
+    "id": 2
+  }
+]

@@ -1,4 +1,7 @@
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, checkpw, gensalt
 
-async def hash_password(password:str):
+def hash_password(password:str):
     return hashpw(password.encode('utf-8'), gensalt())
+
+def check_pass(password, hashed):
+    return checkpw(password, hashed)

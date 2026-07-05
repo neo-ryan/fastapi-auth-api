@@ -5,7 +5,11 @@ class UserBase(BaseModel):
     email:EmailStr
 
 class UserCreate(UserBase):
-    password:str = Field(min_length=6, description='Pre hash password')
+    password:str = Field(min_length=6, description='Pre-hash password')
 
 class UserOut(UserBase):
     id:int
+
+class UserLogin(BaseModel):
+    email:EmailStr
+    password:str = Field(min_length=6)
