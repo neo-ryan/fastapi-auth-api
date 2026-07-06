@@ -23,3 +23,7 @@ def hash_password(password:str):
 
 def check_pass(password, hashed):
     return checkpw(password, hashed)
+
+def get_current_user(token:str):
+    decoded = jwt.decode(token, key=KEY, algorithms=[ALGORITHM])
+    return decoded

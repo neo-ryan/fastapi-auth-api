@@ -8,8 +8,8 @@ async def register(user_data:UserCreate):
 async def login(user:UserLogin):
     return await repository.login(user)
     
-async def current_user():
-    pass
+async def current_user(token:str):
+    return await repository.check_user(token)
 
 async def refresh():
     pass

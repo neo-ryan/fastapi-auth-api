@@ -1,8 +1,9 @@
 from json import load, dump
 from pathlib import Path
-from app.core.security import hash_password, check_pass, make_access_token
+from app.core.security import hash_password, check_pass, make_access_token, get_current_user
 from app.models.users import UserBase, UserCreate, UserOut, UserLogin
 from fastapi import HTTPException
+from pydantic import EmailStr
 
 BASE_DIR = Path(__file__).parent / 'users.json'
 
@@ -38,4 +39,15 @@ async def login(user:UserLogin):
             else:
                 raise HTTPException(status_code=401)
         raise HTTPException(status_code=401)
-            
+
+
+async def check_user(token:str):
+    data = await get_users()
+    decoded_token = get_current_user(token)
+    
+    for u in data:
+        if u['email'] == decoded_token['email']:
+            user = UserOut.model_validate(u)
+            return user
+    
+    raise HTTPException(status_code=401)
