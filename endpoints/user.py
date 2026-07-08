@@ -19,11 +19,11 @@ async def login(user:UserLogin):
 async def current_user(token:str = Depends(auth2_scheme)):
     return await user_function.current_user(token)
 
-@router.post('/auth/refresh')
+@router.post('/refresh')
 async def refresh(refresh_token):
     return await user_function.refresh(refresh_token)
 
-@router.post('/auth/logout')
+@router.post('/logout')
 async def logout(refresh_token:str):
     return await user_function.logout(refresh_token)
 
