@@ -11,11 +11,11 @@ async def login(user:UserLogin):
 async def current_user(token:str):
     return await repository.check_user(token)
 
-async def refresh():
-    pass
+async def refresh(refresh_token:str):
+    return await repository.refresh(refresh_token)
 
-async def logout():
-    pass
+async def logout(refresh_token:str):
+    return await repository.logout(refresh_token)
 
 async def update_user():
     pass
