@@ -27,10 +27,10 @@ async def refresh(refresh_token):
 async def logout(refresh_token:str):
     return await user_function.logout(refresh_token)
 
-@router.put('/users/me')
-async def update_user():
-    pass
+#@router.put('/users/me')
+#async def update_user():
+#    pass
 
-@router.put('/users/me/password')
-async def change_password():
-    pass
+#@router.put('/users/me/password')
+#async def change_password():
+#    #pass
